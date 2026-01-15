@@ -1,0 +1,476 @@
+/* style.css - Style pour le jeu Memory Drapeaux */
+
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(25, 25, 35, 0.9);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid #4a4a6d;
+}
+
+/* En-tête */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.banner {
+    font-family: 'Courier New', monospace;
+    color: #00ff9d;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ff9d;
+    background: rgba(0, 255, 157, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #00ff9d;
+}
+
+.mr-dath-message {
+    background: rgba(0, 100, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #0064ff;
+    font-size: 1.1em;
+}
+
+.mr-dath-message strong {
+    color: #00d9ff;
+}
+
+/* Règles */
+.rules {
+    background: rgba(255, 193, 7, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid #ffc107;
+}
+
+.rules h2 {
+    color: #ffc107;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.rules ol {
+    margin-left: 25px;
+    font-size: 1.1em;
+}
+
+.rules li {
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+.highlight {
+    background: rgba(255, 193, 7, 0.3);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #ffc107;
+}
+
+/* Difficulté */
+.difficulty-section {
+    background: rgba(156, 39, 176, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid #9c27b0;
+}
+
+.difficulty-section h2 {
+    color: #9c27b0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.difficulty-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.difficulty-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #4a4a6d;
+    color: white;
+    min-width: 200px;
+}
+
+.difficulty-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.difficulty-btn[data-level="1"]:hover {
+    background: #4CAF50;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+.difficulty-btn[data-level="2"]:hover {
+    background: #FF9800;
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
+
+.difficulty-btn[data-level="3"]:hover {
+    background: #f44336;
+    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+}
+
+.difficulty-btn.active {
+    transform: scale(1.05);
+}
+
+.difficulty-btn.active[data-level="1"] {
+    background: #4CAF50;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+}
+
+.difficulty-btn.active[data-level="2"] {
+    background: #FF9800;
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.6);
+}
+
+.difficulty-btn.active[data-level="3"] {
+    background: #f44336;
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.6);
+}
+
+/* Zone de jeu */
+.game-area {
+    margin-top: 30px;
+}
+
+.mr-dath-instruction {
+    background: rgba(33, 150, 243, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.2em;
+    border: 1px solid #2196f3;
+    color: #90caf9;
+}
+
+/* Grille des drapeaux */
+.flags-container {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 1px solid #555;
+}
+
+.flags-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+}
+
+.flag-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flag-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.flag-number {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.flag-bands {
+    display: flex;
+    height: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 25px;
+}
+
+.flag-band {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+/* Contrôles */
+.controls {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.timer-container {
+    margin-bottom: 20px;
+}
+
+.timer {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ff9800;
+    background: rgba(255, 152, 0, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    display: inline-block;
+    border: 2px solid #ff9800;
+}
+
+.start-btn, .hide-btn {
+    padding: 15px 40px;
+    font-size: 1.3em;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    min-width: 250px;
+}
+
+.start-btn {
+    background: linear-gradient(45deg, #2196f3, #21cbf3);
+    color: white;
+}
+
+.hide-btn {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+}
+
+.start-btn:hover, .hide-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Section de saisie */
+.input-section {
+    background: rgba(255, 152, 0, 0.1);
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 30px;
+    border: 1px solid #ff9800;
+}
+
+.input-header {
+    font-family: 'Courier New', monospace;
+    color: #ff9800;
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ff9800;
+}
+
+.mr-dath-question {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #ffcc80;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    padding: 15px;
+    font-size: 1.2em;
+    width: 120px;
+    text-align: center;
+    border: 2px solid #2196f3;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: 'Courier New', monospace;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #00ff9d;
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+}
+
+.input-group button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.input-group button:hover {
+    background: #45a049;
+    transform: scale(1.05);
+}
+
+.error-message {
+    color: #ff5252;
+    text-align: center;
+    font-weight: bold;
+    min-height: 25px;
+    padding: 10px;
+}
+
+/* Section résultat */
+.result-section {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 30px;
+    border: 1px solid #4CAF50;
+}
+
+.result-header {
+    font-family: 'Courier New', monospace;
+    color: #4CAF50;
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #4CAF50;
+}
+
+.result-content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 1.8;
+}
+
+.restart-btn {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    background: linear-gradient(45deg, #9c27b0, #673ab7);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.restart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(156, 39, 176, 0.3);
+}
+
+/* Pied de page */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #4a4a6d;
+    color: #888;
+    font-size: 0.9em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .flags-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .difficulty-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .difficulty-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .input-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .input-group input {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .flags-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .banner, .input-header, .result-header {
+        font-size: 0.9em;
+    }
+}

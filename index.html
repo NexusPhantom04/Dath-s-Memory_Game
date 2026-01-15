@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Drapeaux - Mr_Dath</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Couleurs pour les drapeaux */
+        .blue-band { background-color: #002395; }
+        .white-band { background-color: #FFFFFF; color: black; }
+        .red-band { background-color: #ED2939; }
+        .green-band { background-color: #009246; }
+        .yellow-band { background-color: #FFD700; color: black; }
+        .black-band { background-color: #000000; }
+        .orange-band { background-color: #FF6600; }
+        
+        /* Bandeau tricolore pour la France */
+        .france-flag {
+            background: linear-gradient(to right, 
+                #002495 33%, 
+                #FFFFFF 33% 66%, 
+                #ED2939 66%);
+        }
+        
+        /* Animation pour le timer */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête avec le titre -->
+        <header>
+            <div class="banner">
+                ╔══════════════════════════════════════════╗<br>
+                ║        JEU DE MEMORY avec des drapeaux   ║<br>
+                ╚══════════════════════════════════════════╝
+            </div>
+            
+            <div class="mr-dath-message">
+                <p>👋 <strong>Mr_Dath:</strong> Bonjour je suis Mr_Dath et je vais évaluer votre mémoire avec mon jeu de memory 😊.</p>
+            </div>
+        </header>
+        
+        <!-- Règles du jeu -->
+        <section class="rules">
+            <h2>📜 LES RÈGLES DU JEU :</h2>
+            <ol>
+                <li>Tu vois 30 drapeaux numérotés de 1 à 30</li>
+                <li>Il y a <span class="highlight">2 drapeaux France</span> cachés</li>
+                <li>Tu dois trouver <span class="highlight">TOUTES</span> leurs positions</li>
+                <li>Tu as <span id="time-display">10 secondes</span> pour mémoriser</li>
+                <li>Ensuite, entre les positions que tu as retenues</li>
+            </ol>
+        </section>
+        
+        <!-- Sélection de la difficulté -->
+        <section class="difficulty-section">
+            <h2>🎯 NIVEAU DE DIFFICULTÉ</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" data-level="1">Niveau 1 😇 (10 sec)</button>
+                <button class="difficulty-btn" data-level="2">Niveau 2 🧐 (7 sec)</button>
+                <button class="difficulty-btn" data-level="3">Niveau 3 😈 (4 sec)</button>
+            </div>
+        </section>
+        
+        <!-- Zone du jeu -->
+        <main class="game-area">
+            <!-- Message de Mr_Dath -->
+            <div class="mr-dath-instruction" id="instruction">
+                Mr_Dath 😇: donne moi les positions du drapeau de la France séparées par un espace. 
+                Attention tu as <span id="timer-seconds">10</span> secondes !!!💭 🔎
+            </div>
+            
+            <!-- Grille des drapeaux -->
+            <div class="flags-container" id="flags-container">
+                <!-- Les drapeaux seront générés ici par JavaScript -->
+            </div>
+            
+            <!-- Timer et boutons -->
+            <div class="controls">
+                <div class="timer-container">
+                    <div class="timer" id="timer">
+                        ⏱️ <span id="countdown">10</span> secondes restantes
+                    </div>
+                </div>
+                
+                <button class="start-btn" id="start-btn">🚀 AFFICHER LES DRAPEAUX</button>
+                <button class="hide-btn" id="hide-btn" style="display: none;">🙈 CACHER LES DRAPEAUX</button>
+            </div>
+            
+            <!-- Saisie des positions -->
+            <div class="input-section" id="input-section" style="display: none;">
+                <div class="input-header">
+                    ╔══════════════════════════════════════════╗<br>
+                    ║  TEMPS ÉCOULÉ ! Les drapeaux ont disparu ║<br>
+                    ╚══════════════════════════════════════════╝
+                </div>
+                
+                <div class="mr-dath-question">
+                    Mr_Dath 😇: Donne-moi les positions du drapeau de la FRANCE<br>
+                    (sépare les positions par un espace, exemple: 5 12) :
+                </div>
+                
+                <div class="input-group">
+                    <input type="text" id="position1" placeholder="Position 1" maxlength="2">
+                    <input type="text" id="position2" placeholder="Position 2" maxlength="2">
+                    <button id="submit-btn">✅ VÉRIFIER</button>
+                </div>
+                
+                <div class="error-message" id="error-msg"></div>
+            </div>
+            
+            <!-- Résultat -->
+            <div class="result-section" id="result-section" style="display: none;">
+                <div class="result-header">
+                    ╔══════════════════════════════════════════╗<br>
+                    ║            VERDICT FINAL                 ║<br>
+                    ╚══════════════════════════════════════════╝
+                </div>
+                
+                <div class="result-content" id="result-content">
+                    <!-- Le résultat sera affiché ici -->
+                </div>
+                
+                <button class="restart-btn" id="restart-btn">🔄 RECOMMENCER</button>
+            </div>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer>
+            <p>Créé par Mr_Dath avec ❤️ | Compatible tous navigateurs</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="game.js"></script>
+</body>
+</html>
